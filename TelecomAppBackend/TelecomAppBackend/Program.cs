@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using TelecomAppBackend.Data;
+
 namespace TelecomAppBackend
 {
     public class Program
@@ -6,7 +9,21 @@ namespace TelecomAppBackend
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin();
+                        policy.AllowAnyMethod();
+                        policy.AllowAnyHeader();
+                    });
+            });
             // Add services to the container.
+            builder.Services.AddDbContext<TelecomDbContext>(options =>
+            {
+                options.UseSqlServer("Data Source=LAPTOP-UI5FPSOQ;Initial Catalog=TelecomDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,7 +40,7 @@ namespace TelecomAppBackend
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowAll");
             app.UseAuthorization();
 
 
