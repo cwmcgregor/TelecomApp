@@ -25,13 +25,23 @@ namespace TelecomAppBackend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Device>>> GetDevices()
         {
-          if (_context.Devices == null)
-          {
-              return NotFound();
-          }
+            if (_context.Devices == null)
+            {
+                return NotFound();
+            }
             return await _context.Devices.ToListAsync();
         }
 
+        // GET: api/Devices
+        [HttpGet("Plan/{planId}")]
+        public async Task<ActionResult<IEnumerable<Device>>> GetPlanDevices(int planId)
+        {
+            if (_context.Devices == null)
+            {
+                return NotFound();
+            }
+            return await _context.Devices.Where(d=>d.PlanID==planId).ToListAsync();
+        }
         // GET: api/Devices/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Device>> GetDevice(int id)
