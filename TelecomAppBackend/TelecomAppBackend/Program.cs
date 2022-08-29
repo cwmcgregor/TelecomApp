@@ -22,7 +22,7 @@ namespace TelecomAppBackend
             // Add services to the container.
             builder.Services.AddDbContext<TelecomDbContext>(options =>
             {
-                options.UseSqlServer("Data Source=LAPTOP-UI5FPSOQ;Initial Catalog=TelecomDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                options.UseSqlServer("Data Source=LAPTOP-6S3C2O11;Initial Catalog=TelecomApp;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             });
 
             builder.Services.AddControllers();
