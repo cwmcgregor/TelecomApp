@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ namespace TelecomAppBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
+    //Use [AllowAnonymous] to remove authorization on http request.
     public class PlansController : ControllerBase
     {
         private readonly TelecomDbContext _context;
