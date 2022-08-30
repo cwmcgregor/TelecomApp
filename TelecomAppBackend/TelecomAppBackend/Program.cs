@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
 using TelecomAppBackend.Data;
 
 namespace TelecomAppBackend
@@ -26,7 +27,34 @@ namespace TelecomAppBackend
             });
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services.AddAuthorization();
+
+            builder.Services.AddBff();
+
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+                options.DefaultSignOutScheme = "oidc";
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.Authority = "https://localhost:7238";
+
+                options.ClientId = "bff";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+
+                options.Scope.Add("api1");
+
+                options.SaveTokens = true;
+                options.GetClaimsFromUserInfoEndpoint = true;
+            });
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -41,8 +69,21 @@ namespace TelecomAppBackend
 
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+            app.UseAuthentication();
+
+            app.UseBff();
+
             app.UseAuthorization();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapBffManagementEndpoints();
+            });
 
             app.MapControllers();
 
