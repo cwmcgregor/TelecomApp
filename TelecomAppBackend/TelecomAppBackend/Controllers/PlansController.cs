@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TelecomAppBackend.Data;
+using TelecomAppBackend.DTO;
 using TelecomAppBackend.Models;
 
 namespace TelecomAppBackend.Controllers
@@ -47,7 +48,17 @@ namespace TelecomAppBackend.Controllers
                 return NotFound();
             }
 
-            return plan;
+            var devices=await _context.Devices.Where(d=>d.PlanId==plan.PlanId).ToListAsync();
+            var planDto = new PlanDetailsDTO
+            {
+                PlanId = plan.PlanId,
+                PlanName = plan.PlanName,
+                DeviceLimit = plan.DeviceLimit,
+                Price = plan.Price,
+                Devices = devices
+            };
+
+            return Ok(planDto);
         }
 
         // PUT: api/Plans/5
@@ -84,12 +95,21 @@ namespace TelecomAppBackend.Controllers
         // POST: api/Plans
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Plan>> PostPlan(Plan plan)
+        public async Task<ActionResult<Plan>> PostPlan(PlanDTO planDto)
         {
           if (_context.Plans == null)
           {
               return Problem("Entity set 'TelecomDbContext.Plans'  is null.");
           }
+            var plan = new Plan()
+            {
+                PlanName = planDto.PlanName,
+                DeviceLimit = planDto.DeviceLimit,
+                Price = planDto.Price,
+                UserId = planDto.UserId,
+                Devices = new List<Device>()
+            };
+
             _context.Plans.Add(plan);
             await _context.SaveChangesAsync();
 

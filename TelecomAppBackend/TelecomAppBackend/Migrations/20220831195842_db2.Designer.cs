@@ -11,8 +11,8 @@ using TelecomAppBackend.Data;
 namespace TelecomAppBackend.Migrations
 {
     [DbContext(typeof(TelecomDbContext))]
-    [Migration("20220828192301_BasicPlansAndDevices")]
-    partial class BasicPlansAndDevices
+    [Migration("20220831195842_db2")]
+    partial class db2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,14 +37,17 @@ namespace TelecomAppBackend.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("PlanID")
+                    b.Property<int>("PlanId")
                         .HasColumnType("int");
 
                     b.HasKey("DeviceId");
 
-                    b.HasIndex("PlanID");
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
+
+                    b.HasIndex("PlanId");
 
                     b.ToTable("Devices");
                 });
@@ -67,16 +70,57 @@ namespace TelecomAppBackend.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("PlanId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Plans");
+                });
+
+            modelBuilder.Entity("TelecomAppBackend.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TelecomAppBackend.Models.Device", b =>
                 {
                     b.HasOne("TelecomAppBackend.Models.Plan", "Plan")
                         .WithMany("Devices")
-                        .HasForeignKey("PlanID")
+                        .HasForeignKey("PlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -85,7 +129,23 @@ namespace TelecomAppBackend.Migrations
 
             modelBuilder.Entity("TelecomAppBackend.Models.Plan", b =>
                 {
+                    b.HasOne("TelecomAppBackend.Models.User", "User")
+                        .WithMany("Plans")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TelecomAppBackend.Models.Plan", b =>
+                {
                     b.Navigation("Devices");
+                });
+
+            modelBuilder.Entity("TelecomAppBackend.Models.User", b =>
+                {
+                    b.Navigation("Plans");
                 });
 #pragma warning restore 612, 618
         }

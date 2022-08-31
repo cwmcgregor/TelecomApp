@@ -40,7 +40,7 @@ namespace TelecomAppBackend.Controllers
             {
                 return NotFound();
             }
-            return await _context.Devices.Where(d=>d.PlanID==planId).ToListAsync();
+            return await _context.Devices.Where(d=>d.PlanId==planId).ToListAsync();
         }
         // GET: api/Devices/5
         [HttpGet("{id}")]
