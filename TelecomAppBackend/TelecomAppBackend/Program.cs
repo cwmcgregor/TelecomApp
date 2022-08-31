@@ -41,10 +41,22 @@ namespace TelecomAppBackend
 
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
+
+            app.UseAuthentication();
+            app.UseRouting();
+
+            app.UseBff();
+
             app.UseAuthorization();
 
+            app.UseEndpoints(endpoints => 
+            {
+                endpoints.MapControllers()
+                .RequireAuthorization()
+                .AsBffApiEndpoint();
+            });
 
-            app.MapControllers();
+            //app.MapControllers();
 
             app.Run();
         }
