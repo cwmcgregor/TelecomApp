@@ -9,7 +9,7 @@ import { Device } from './devices-model';
 })
 export class DeviceService {
 
-  private devicesUrl="https://localhost:7238/Devices";
+  private devicesUrl="https://localhost:7238/api/Devices";
 
   private httpOptions = {
     headers: new HttpHeaders({

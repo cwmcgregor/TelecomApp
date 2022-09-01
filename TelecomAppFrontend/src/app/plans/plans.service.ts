@@ -9,7 +9,7 @@ import { Plan } from './plans-model';
 })
 export class PlanService {
 
-  private plansUrl="https://localhost:7238/Plans";
+  private plansUrl="https://localhost:7238/api/Plans";
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -25,7 +25,7 @@ export class PlanService {
   }
 
   getUsersPlans(id:number):Observable<Plan[]>{
-    let url=`${this.plansUrl}/${id}`;
+    let url=`${this.plansUrl}/User/${id}`;
     return this.http.get<Plan[]>(url,this.httpOptions);
   }
 

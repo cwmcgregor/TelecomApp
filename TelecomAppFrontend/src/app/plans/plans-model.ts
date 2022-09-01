@@ -1,4 +1,4 @@
-import { Device } from "../devices/devices-model";
+import { Device } from "../Devices/devices-model"
 
 export interface Plan {
         planId:number,

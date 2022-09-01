@@ -1,1 +1,15 @@
-<p>plans-index works!</p>
+<h1>Your Active Plans</h1>
+<div id="infoBox" *ngFor="let plan of plans">
+<div id="line1">
+<h2 > Plan ID: {{plan.planId}}</h2>
+<h2>Plan Type: {{plan.planName}}</h2>
+</div>
+<div id="line2">
+<h2>Device Limit: {{plan.deviceLimit}}</h2>
+<h2>Number of Active Devices:{{plan.devices.length}}</h2>
+</div>
+<h2>Monthly Price: ${{plan.price}}</h2>
+<button>View Devices</button>
+<button>{{plan.deviceLimit>plan.devices.length ? 'Add Device':'Plan at Device Capacity'}}</button>
+<button>Cancel Plan</button>
+</div>

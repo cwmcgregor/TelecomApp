@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Plan } from '../plans-model';
+import { PlanService } from '../plans.service';
 
 @Component({
   selector: 'app-plans-index',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlansIndexComponent implements OnInit {
 
-  constructor() { }
+  constructor(private planService:PlanService, private router:Router) { }
 
   ngOnInit(): void {
+    this.getUsersPlans();
   }
 
+  plans:Plan[]=[];
+
+
+  getUsersPlans():void{
+    this.planService.getUsersPlans(1).subscribe(plans=>this.plans=plans);
+  }
 }
