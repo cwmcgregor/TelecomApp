@@ -9,8 +9,6 @@ namespace TelecomAppBackend.Models
         public string PlanName { get; set; }
         public int DeviceLimit { get; set; }
         public decimal Price { get; set; }
-
-        //[ForeignKey("User")]
         public int UserId { get; set; }
         [JsonIgnore]
         public virtual User? User { get; set; }

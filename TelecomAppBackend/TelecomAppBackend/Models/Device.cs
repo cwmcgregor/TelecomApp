@@ -9,7 +9,6 @@ namespace TelecomAppBackend.Models
         public string DeviceName { get; set; }
      
         public string PhoneNumber { get; set; }
-        //[ForeignKey("Plan")]
         public int PlanId { get; set; }
         [JsonIgnore]
         public virtual Plan? Plan { get; set; }
