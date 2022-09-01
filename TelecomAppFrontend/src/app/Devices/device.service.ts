@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Device } from './DeviceModel';
+import { Device } from './devices-model';
 
 @Injectable({
   providedIn: 'root'
