@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Plan } from './plans-model';
+import { PlanDTO } from './plan-DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class PlanService {
     return this.http.get<Plan[]>(url,this.httpOptions);
   }
 
-  addPlan(plan:Plan):Observable<Plan>{
+  addPlan(plan:PlanDTO):Observable<Plan>{
     return this.http.post<Plan>(this.plansUrl,plan,this.httpOptions);
   }
 

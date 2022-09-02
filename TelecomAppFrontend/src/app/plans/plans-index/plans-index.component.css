@@ -4,20 +4,22 @@
 #infoBox{
     /* height:22vh; */
     width:60vw;
-    outline: 3px solid rgb(91, 225, 194);
+    outline: 5px solid rgb(91, 225, 194);
     margin-left: 5%;
     margin-bottom: 3%;
     padding: 8px;
     padding-left: 20px;
     border-radius: 25px;
     font-size: large;
+    background-color: rgb(245, 241, 241);
 }
 h1{
-    margin-left: 5%;
-    margin-top: 5%;
+    margin-right: 20px;
+    color: black;
 }
 button{
     margin-right: 5px;
+    border: 0px;
 }
 .full{
     background-color: gray;
@@ -33,4 +35,39 @@ button{
 }
 #deviceButtons{
     display: flex;
+}
+#titleBox{
+    display: flex;
+    margin-left: 5%;
+    margin-top: 2%;
+}
+#planOptionsBox{
+    display: flex;
+}
+.optionButton{
+    display: grid;
+    align-items: center;
+    outline: 5px solid rgb(91, 225, 194);
+    margin-left: 5%;
+    margin-bottom: 1%;
+    padding: 8px;
+    border-radius: 25px;
+    font-size: large;
+    background-color: rgb(245, 241, 241);
+    width: 16.3vw;
+}
+.selected{
+    background-color: rgb(91, 225, 194);
+}
+#instructions{
+    margin-left: 5%;
+    font-size: large;
+    margin-bottom: 5px;
+}
+#submit,#cancel{
+    margin-left: 5%;
+    margin-bottom: 1%;
+}
+#cancel{
+    margin-left: 10px;
 }
