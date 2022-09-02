@@ -1,15 +1,33 @@
-<h1>Your Active Plans</h1>
-<div id="infoBox" *ngFor="let plan of plans">
-<div id="line1">
+<h1 class="title">Your Active Plans</h1>
+<div *ngFor="let plan of plans">
+<div  id="infoBox" >
+    <div class="columns">
+<div class="column" id="line1">
 <h2 > Plan ID: {{plan.planId}}</h2>
 <h2>Plan Type: {{plan.planName}}</h2>
 </div>
-<div id="line2">
+<div class="column" id="line2">
 <h2>Device Limit: {{plan.deviceLimit}}</h2>
-<h2>Number of Active Devices:{{plan.devices.length}}</h2>
+<h2>Number of Active Devices: {{plan.devices.length}}</h2>
+</div>
 </div>
 <h2>Monthly Price: ${{plan.price}}</h2>
-<button>View Devices</button>
-<button>{{plan.deviceLimit>plan.devices.length ? 'Add Device':'Plan at Device Capacity'}}</button>
-<button>Cancel Plan</button>
+<button (click)="expandPlan(plan)" class="button is-primary">View Devices</button>
+<button [class.full]="plan.devices.length==plan.deviceLimit" class="button is-primary">{{plan.deviceLimit>plan.devices.length ? 'Add Device':'Plan at Device Capacity'}}</button>
+<button  class="button is-primary">Cancel Plan</button>
+<div *ngIf="plan.expand">
+    <div class="columns" id="device" *ngFor="let device of plan.devices">
+        <div class="column" id="deviceInfo">
+        <h2>{{device.deviceName}}</h2>
+        <h2>{{device.phoneNumber}}</h2>
+    </div>
+    <div class="column" id="deviceButtons">
+        <button class="button is-warning">Edit Device Info</button>
+        <button class="button is-danger">Remove From Plan</button>
+    </div>
+    </div>
+</div>
+</div>
+
+
 </div>

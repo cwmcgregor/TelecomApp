@@ -19,7 +19,16 @@ export class PlansIndexComponent implements OnInit {
 
   plans:Plan[]=[];
 
-
+  expandPlan(plan:Plan):void{
+    if(plan.expand==null){
+      plan.expand=true;
+    } else if(plan.expand==false){
+      plan.expand=true;
+    }
+    else{
+      plan.expand=false;
+    }
+  }
   getUsersPlans():void{
     this.planService.getUsersPlans(1).subscribe(plans=>this.plans=plans);
   }

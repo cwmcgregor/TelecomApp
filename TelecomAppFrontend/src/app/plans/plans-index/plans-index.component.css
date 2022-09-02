@@ -1,0 +1,36 @@
+/* #line1, #line2{
+    display:flex;
+} */
+#infoBox{
+    /* height:22vh; */
+    width:60vw;
+    outline: 3px solid rgb(91, 225, 194);
+    margin-left: 5%;
+    margin-bottom: 3%;
+    padding: 8px;
+    padding-left: 20px;
+    border-radius: 25px;
+    font-size: large;
+}
+h1{
+    margin-left: 5%;
+    margin-top: 5%;
+}
+button{
+    margin-right: 5px;
+}
+.full{
+    background-color: gray;
+}
+#device{
+    display: flex;
+    align-items: center;
+    width: 70%;
+}
+#deviceInfo{
+    
+    margin-right: 5px;
+}
+#deviceButtons{
+    display: flex;
+}
