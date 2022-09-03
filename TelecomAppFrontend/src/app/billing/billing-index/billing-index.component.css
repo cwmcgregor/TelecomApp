@@ -1,0 +1,20 @@
+.dotted{
+    margin-left: 5%;
+    font-size: large;
+    border-bottom: dotted gray 2px;
+    width: 60vw;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+h1{
+    margin-left: 5%;
+    margin-top: 2%;
+}
+#hidden{
+    color: white;
+    border-bottom: none;
+}
+#fees{
+    margin-top: 5%;
+}

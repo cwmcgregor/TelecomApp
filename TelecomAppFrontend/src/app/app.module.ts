@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlansModule } from './plans/plans.module';
 import { DevicesModule } from './Devices/devices.module';
+import { BillingModule } from './billing/billing.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DevicesModule } from './Devices/devices.module';
     PlansModule,
     DevicesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BillingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

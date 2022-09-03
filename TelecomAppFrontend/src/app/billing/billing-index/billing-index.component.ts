@@ -9,7 +9,10 @@ import { PlanService } from 'app/plans/plans.service';
 })
 export class BillingIndexComponent implements OnInit {
 
-  plans: Plan[] = []
+  plans: Plan[] = [];
+  planSubtotal:number=0;
+  tax:number=0;
+  total:number=0;
 
   constructor(private plansService: PlanService) { }
 
@@ -18,7 +21,18 @@ export class BillingIndexComponent implements OnInit {
   }
 
   retrievePlans(){
-    //make subscribe call to plans service here
+    this.plansService.getUsersPlans(1).subscribe(plans=>
+      {
+        this.plans=plans;
+        this.plans.forEach(plan => {
+          this.planSubtotal=(this.planSubtotal*100+plan.price*100)/100;
+         
+          
+        });
+        this.planSubtotal+=14;
+        this.tax=Number(((this.planSubtotal*100*0.0625)/100).toFixed(2));
+        this.total=(this.planSubtotal*100+this.tax*100)/100;
+      });
   }
 
 }

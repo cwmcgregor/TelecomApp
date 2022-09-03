@@ -1,4 +1,42 @@
-    <div class="level-item mt-6">
+    <h1 class="title">Your Monthly Bill</h1>
+    <div *ngFor="let plan of plans">
+        <div class="dotted">
+        <h2>{{plan.planName}} Plan {{plan.planId}}</h2>
+        <h2>${{plan.price}}</h2>
+        </div>
+    </div>
+    
+    <div id="fees">
+    <div class="dotted">
+        <h2>Service Fee</h2>
+        <h2>$5.00</h2>
+        </div>
+        <div class="dotted">
+            <h2>Account Fee</h2>
+            <h2>$7.00</h2>
+            </div>
+            <div id="hidden" class="dotted">
+                <h2>Hidden Fee</h2>
+                <h2>$2.00</h2>
+                </div>
+            </div>
+            <div class="dotted">
+                <h2>Subtotal</h2>
+                <h2>${{planSubtotal}}</h2>
+                </div>
+            <div class="dotted">
+                <h2>Sales Tax</h2>
+                <h2>${{tax}}</h2>
+                </div>
+                <div class="dotted">
+                    <h2>Total</h2>
+                    <h2>${{total}}</h2>
+                    </div>
+    
+    
+    
+    
+    <!-- <div class="level-item mt-6">
     <div class="columns is-multiline is-centered cards-container" id="sectioncontainer">
         <div class="column is-narrow px-6">
             <article class="message is-info">
@@ -46,4 +84,4 @@
             </article>
         </div>
     </div>
-    </div>
+    </div> -->
