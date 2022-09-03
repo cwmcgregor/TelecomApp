@@ -1,8 +1,5 @@
-/* #line1, #line2{
-    display:flex;
-} */
+
 #infoBox{
-    /* height:22vh; */
     width:60vw;
     outline: 5px solid rgb(91, 225, 194);
     margin-left: 5%;

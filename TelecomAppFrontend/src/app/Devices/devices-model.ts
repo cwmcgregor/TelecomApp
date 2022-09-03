@@ -2,5 +2,6 @@ export interface Device{
     deviceId:number,
     deviceName:string,
     phoneNumber:string,
-    planId:number
+    planId:number,
+    edit:boolean
 }

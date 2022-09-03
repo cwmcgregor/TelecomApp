@@ -1,0 +1,28 @@
+<form [formGroup]="editDeviceForm" (ngSubmit)="submit()">
+    <div class="form-group">
+        <label for="id">Device Name</label>
+        <input type="text" class="form-control" [(ngModel)]="deviceName" id="deviceName" formControlName="name" />
+        <div *ngIf="f['name'].touched && f['name'].invalid" class="alert">
+            <div *ngIf="f['name'].errors f['name'].errors['required']">Device name is required.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="id">Phone Number</label>
+        <input type="text" class="form-control" [(ngModel)]="phoneNumber" id="phoneNumber" formControlName="number" />
+        <div *ngIf="f['number'].touched && f['number'].invalid" class="alert">
+            <div *ngIf="f['number'].errors f['number'].errors['required']">Phone number is required.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="id">Plan ID</label>
+        <select class="form-control" [(ngModel)]="planId" id="planId" formControlName="planId" >
+           
+            <option *ngFor="let id of planIds" value={{id}}>{{id}}</option>
+        
+        </select>
+        <div *ngIf="f['planId'].touched && f['planId'].invalid" class="alert">
+            <div *ngIf="f['planId'].errors f['planId'].errors['required']">Plan ID is required.</div>
+        </div>
+    </div>
+    <button type="submit" id="submit" [disabled]="!editDeviceForm.valid">Submit</button>
+    </form>

@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PlansIndexComponent } from './plans-index/plans-index.component';
 
 const routes: Routes = [
-{path:'plans/index',component: PlansIndexComponent}
+{path:'plans',component: PlansIndexComponent}
 ];
 
 @NgModule({

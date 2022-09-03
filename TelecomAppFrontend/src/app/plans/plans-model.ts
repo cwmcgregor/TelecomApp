@@ -7,5 +7,6 @@ export interface Plan {
         price:number,
         userId:number,
         devices:Device[]
-        expand:boolean
+        expand:boolean,
+        addForm:boolean
 }

@@ -3,6 +3,8 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Device } from './devices-model';
+import { DeviceDTO } from './device-DTO';
+import { DeviceDTO2 } from './device-DTO2';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +26,11 @@ export class DeviceService {
     return this.http.get<Device>(url,this.httpOptions);
   }
 
-  addDevice(device:Device):Observable<Device>{
+  addDevice(device:DeviceDTO):Observable<Device>{
     return this.http.post<Device>(this.devicesUrl,device,this.httpOptions);
   }
 
-  updateDevice(device:Device):Observable<Device>{
+  updateDevice(device:DeviceDTO2):Observable<Device>{
     let url=`${this.devicesUrl}/${device.deviceId}`;
     return this.http.put<Device>(url,device,this.httpOptions);
   }
