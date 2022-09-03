@@ -1,0 +1,11 @@
+#textbg {
+    border: 10px solid rgb(91, 225, 194);
+    border-radius: 25px;
+    padding: 15px;
+    background: white;
+    background-clip: padding-box;
+  }
+
+  h1,h2 {
+    color: rgb(91, 225, 194);
+  }
