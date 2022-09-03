@@ -1,15 +1,53 @@
-<h1>Your Active Plans</h1>
-<div id="infoBox" *ngFor="let plan of plans">
-<div id="line1">
+<div id="titleBox">
+<h1 class="title">Your Active Plans</h1>
+<button (click)="toggleAddPlanForm();" class="button is-primary">Add A New Plan</button>
+</div>
+<div  *ngIf="showAddPlan">
+    <h2 id="instructions">Choose one of our available plans:</h2>
+    <div id="planOptionsBox">
+    <button [class.selected]="plan === selectedPlan"(click)="selectPlanOption(plan)" class="optionButton" *ngFor="let plan of planOptions">
+        <h2>{{plan.planName}}</h2>
+        <h2>Device Limit: {{plan.deviceLimit}}</h2>
+        <h2>Price: {{plan.price}}</h2>
+    </button>
+    
+</div>
+<button (click)="addNewPlan();" id="submit" class="button is-primary">Submit</button>
+<button id="cancel" class="button is-danger" (click)="toggleAddPlanForm();">Cancel</button>
+</div>
+<div *ngFor="let plan of plans">
+<div  id="infoBox" >
+    <div class="columns">
+<div class="column" id="line1">
 <h2 > Plan ID: {{plan.planId}}</h2>
 <h2>Plan Type: {{plan.planName}}</h2>
 </div>
-<div id="line2">
+<div class="column" id="line2">
 <h2>Device Limit: {{plan.deviceLimit}}</h2>
-<h2>Number of Active Devices:{{plan.devices.length}}</h2>
+<h2>Number of Active Devices: {{!plan.devices ? '0':plan.devices.length}}</h2>
+</div>
 </div>
 <h2>Monthly Price: ${{plan.price}}</h2>
-<button>View Devices</button>
-<button>{{plan.deviceLimit>plan.devices.length ? 'Add Device':'Plan at Device Capacity'}}</button>
-<button>Cancel Plan</button>
+<button (click)="expandPlan(plan)" class="button is-primary">{{plan.expand? 'Hide Devices':'View Devices'}}</button>
+<button (click)="showAddDevice(plan)" [class.full]="plan.devices && plan.devices.length==plan.deviceLimit"  class="button is-primary">{{!plan.devices ||plan.devices.length < plan.deviceLimit  ? 'Add Device':'Plan at Device Limit'}}</button>
+<button (click)="deletePlan(plan.planId)"  class="button is-primary">Cancel Plan</button>
+<app-add-device-form [planId]="plan.planId.toString()" *ngIf="plan.addForm"></app-add-device-form>
+<div *ngIf="plan.expand">
+    <div  *ngFor="let device of plan.devices">
+        <div class="columns" id="device">
+        <div class="column" id="deviceInfo">
+        <h2>{{device.deviceName}}</h2>
+        <h2>{{device.phoneNumber}}</h2>
+    </div>
+    <div class="column" id="deviceButtons">
+        <button (click)="expandDevice(device)" class="button is-warning">Edit Device Info</button>
+        <button (click)="deleteDevice(device.deviceId)" class="button is-danger">Remove From Plan</button>
+    </div>
+</div>
+    <app-edit-device-form [deviceId]="device.deviceId.toString()" [deviceName]="device.deviceName" [phoneNumber]="device.phoneNumber" [planId]="device.planId.toString()" [planIds]="planIds" *ngIf="device.edit"></app-edit-device-form>
+    </div>
+</div>
+</div>
+
+
 </div>

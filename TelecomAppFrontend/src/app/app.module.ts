@@ -1,10 +1,12 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlansModule } from './plans/plans.module';
+import { DevicesModule } from './Devices/devices.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,10 @@ import { PlansModule } from './plans/plans.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    PlansModule
+    PlansModule,
+    DevicesModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
